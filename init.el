@@ -21,6 +21,8 @@
           paredit
           rainbow-delimiters
           rinari
+          evil
+          magit
           color-theme
           color-theme-solarized))
 
@@ -44,6 +46,7 @@
 
 ;; Basic Settings
 (setq inhibit-startup-message t)
+(global-undo-tree-mode -1)
 (show-paren-mode -1)
 (column-number-mode t)
 (setq display-time-24hr-format t)
@@ -113,3 +116,8 @@
               (use-local-map (copy-keymap (current-local-map))))
             (when server-buffer-clients
               (local-set-key (kbd "C-c C-c") 'server-edit))))
+
+;; Evil mode needs undo tree to fully emulate undo-redo
+(add-hook 'evil-mode-hook
+          (lambda ()
+            (undo-tree-mode t)))
