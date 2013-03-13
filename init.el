@@ -49,12 +49,18 @@
 (global-undo-tree-mode -1)
 (show-paren-mode -1)
 (column-number-mode t)
-(setq display-time-24hr-format t)
-(setq display-time-day-and-date t)
-(display-time)
 (global-font-lock-mode t)
 (setq-default show-trailing-whitespace t)
 (server-mode 1)
+
+;; Display The Time In The Mode Line
+(setq display-time-24hr-format t)
+(setq display-time-day-and-date t)
+(display-time)
+
+;; Colliding Buffer Names Should Have Their Directory Names in them
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 ;; Caret Settings
 (blink-cursor-mode -1)
