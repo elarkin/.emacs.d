@@ -62,6 +62,9 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+;; Buffer Switching Settings
+(setq nrepl-hide-special-buffers t)
+
 ;; Caret Settings
 (blink-cursor-mode -1)
 (setq-default cursor-type 'box)
@@ -100,6 +103,10 @@
 (add-hook 'lisp-interaction-mode-hook 'lisp-minor-modes)
 (add-hook 'clojure-mode-hook 'lisp-minor-modes)
 (add-hook 'nrepl-mode-hook 'lisp-minor-modes)
+
+;; Clojure Mode
+(add-hook 'clojure-mode-hook 'nrepl-interaction-mode)
+(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
 
 ;; Ruby Modes
 (defun ruby-minor-modes ()
