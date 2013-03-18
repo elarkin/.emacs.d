@@ -80,6 +80,7 @@
 ;; reload buffers changed on disk without unsaved changes
 (setq auto-revert-verbose nil)
 (setq auto-revert-interval 3)
+(setq global-auto-revert-non-file-buffers t)
 (global-auto-revert-mode 1)
 
 ;; Backups should not clutter my file system
