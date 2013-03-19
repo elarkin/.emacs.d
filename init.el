@@ -11,20 +11,20 @@
 ;; use the marmalade repository
 (require 'package)
 (add-to-list 'package-archives
-	     '("marmalade" . "http://marmalade-repo.org/packages/"))
+             '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
 
 ;; install these packages if they are not there.
 (defvar my-packages '(clojure-mode
-          clojure-test-mode
-          nrepl
-          paredit
-          rainbow-delimiters
-          rinari
-          evil
-          magit
-          color-theme
-          color-theme-solarized))
+                      clojure-test-mode
+                      nrepl
+                      paredit
+                      rainbow-delimiters
+                      rinari
+                      evil
+                      magit
+                      color-theme
+                      color-theme-solarized))
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
@@ -89,6 +89,14 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; Org-Mode settings
+(setq org-agenda-files '("~/org"))
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-cc" 'org-capture)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+(setq org-completion-use-ido t)
+
 ;; Mark settings
 (transient-mark-mode -1)
 
@@ -135,3 +143,15 @@
 (add-hook 'evil-mode-hook
           (lambda ()
             (undo-tree-mode t)))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files (quote ("/Users/evan.larkin/org/notes.org"))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
