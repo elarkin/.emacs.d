@@ -72,6 +72,7 @@
 ;; Completion Settings
 (ido-mode t)
 (ido-everywhere t)
+(setq ido-enable-flex-matching t)
 
 ;; Indentation Settings
 (setq-default indent-tabs-mode nil) ; use spaces
