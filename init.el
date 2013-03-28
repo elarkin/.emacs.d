@@ -91,7 +91,7 @@
       `((".*" ,temporary-file-directory t)))
 
 ;; Org-Mode settings
-(setq org-agenda-files '("~/org"))
+(setq org-agenda-files '("~/org/"))
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-cc" 'org-capture)
 (global-set-key "\C-ca" 'org-agenda)
@@ -125,6 +125,13 @@
     (rainbow-delimiters-mode t)))
 
 (add-hook 'ruby-mode-hook 'ruby-minor-modes)
+
+;; Eshell Hooks
+(defun eshell-settings ()
+  (progn
+    (setq show-trailing-whitespace nil)))
+
+(add-hook 'eshell-mode-hook 'eshell-settings)
 
 ;; Keybindings
 ;; Paredit
