@@ -90,14 +90,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-;; Org-Mode settings
-(setq org-agenda-files '("~/org/"))
-(global-set-key "\C-cl" 'org-store-link)
-(global-set-key "\C-cc" 'org-capture)
-(global-set-key "\C-ca" 'org-agenda)
-(global-set-key "\C-cb" 'org-iswitchb)
-(setq org-completion-use-ido t)
-
 ;; Mark settings
 (transient-mark-mode -1)
 
@@ -151,3 +143,17 @@
 (add-hook 'evil-mode-hook
           (lambda ()
             (undo-tree-mode t)))
+
+;; Load mode-specific initialization files
+(require 'cl)
+
+(defun elisp-file? (filename)
+  (string-match-p "[a-zA-Z0-9\-]+.el" filename))
+
+(setq init-dir "~/.emacs.d/initializers")
+
+(when (file-exists-p init-dir)
+  (let* ((initializer-files (remove-if-not 'elisp-file? (directory-files init-dir)))
+         (initializers (mapcar (lambda (filename) (expand-file-name filename init-dir)) initializer-files)))
+    (dolist (initializer initializers)
+      (load-file initializer))))
