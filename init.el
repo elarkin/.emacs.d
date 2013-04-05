@@ -156,4 +156,4 @@
   (let* ((initializer-files (remove-if-not 'elisp-file? (directory-files init-dir)))
          (initializers (mapcar (lambda (filename) (expand-file-name filename init-dir)) initializer-files)))
     (dolist (initializer initializers)
-      (load-file initializer))))
+      (load initializer))))
