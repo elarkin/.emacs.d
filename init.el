@@ -77,6 +77,8 @@
 ;; Indentation Settings
 (setq-default indent-tabs-mode nil) ; use spaces
 (setq-default tab-width 2)
+(setq js-indent-level 2)
+(setq css-indent-offset 2)
 
 ;; reload buffers changed on disk without unsaved changes
 (setq auto-revert-verbose nil)
