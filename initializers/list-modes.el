@@ -2,7 +2,8 @@
 (defun lisp-minor-modes ()
   (progn
     (paredit-mode t)
-    (rainbow-delimiters-mode t)))
+    (rainbow-delimiters-mode t)
+    (local-set-key (kbd "<tab>") 'reindent-or-completion)))
 
 (add-hook 'emacs-lisp-mode-hook 'lisp-minor-modes)
 (add-hook 'lisp-mode-hook 'lisp-minor-modes)

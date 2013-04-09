@@ -94,6 +94,23 @@
 ;; Mark settings
 (transient-mark-mode -1)                ;Don't hilight after marking. Mark twice to create an active (hilighted) region
 
+;; Reindent-or-completion
+;modes that use a different command for indenting can override this var
+(setq reindent-or-completion-indent 'indent-for-tab-command)
+;modes that use a different command for completion can override this var
+(setq reindent-or-completion-completion 'complete-symbol)
+
+(defun reindent-or-completion (arg)
+  "Between the beginning of line and start of text, (indent-for-tab-command). Anywhere else (completion-at-point)"
+  (interactive "P")
+  (let ((position (point)) start-of-text)
+    (save-excursion
+      (back-to-indentation)
+      (setq start-of-text (point)))
+    (if (<= position start-of-text)
+        (funcall reindent-or-completion-indent)
+      (funcall reindent-or-completion-completion arg))))
+
 ;; Load mode-specific initialization files
 (require 'cl)
 
