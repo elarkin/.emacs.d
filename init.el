@@ -46,13 +46,12 @@
 
 ;; Basic Settings
 (setq inhibit-startup-message t)
-(global-undo-tree-mode -1)
-(show-paren-mode -1)
-(column-number-mode t)
+(global-undo-tree-mode -1)              ;evil mode turns on undo-tree. turning it off restores default emacs undo behavior
+(show-paren-mode -1)                    ;show paren mode flashes matching parens; I prefer rainbow parens
+(column-number-mode t)                  ;show column number in the mode line
 (global-font-lock-mode t)
-(setq-default show-trailing-whitespace t)
-(server-mode 1)
-
+(server-mode 1)                         ;make emacs behave as a server. This allows you to use emacsclient
+                                        ;to connect to your running emacs without incurring a startup cost
 ;; Display The Time In The Mode Line
 (setq display-time-24hr-format t)
 (setq display-time-day-and-date t)
@@ -93,58 +92,7 @@
       `((".*" ,temporary-file-directory t)))
 
 ;; Mark settings
-(transient-mark-mode -1)
-
-;; Hooks
-;; Lisp Modes
-(defun lisp-minor-modes ()
-  (progn
-    (paredit-mode t)
-    (rainbow-delimiters-mode t)))
-
-(add-hook 'emacs-lisp-mode-hook 'lisp-minor-modes)
-(add-hook 'lisp-mode-hook 'lisp-minor-modes)
-(add-hook 'lisp-interaction-mode-hook 'lisp-minor-modes)
-(add-hook 'clojure-mode-hook 'lisp-minor-modes)
-(add-hook 'nrepl-mode-hook 'lisp-minor-modes)
-
-;; Clojure Mode
-(add-hook 'clojure-mode-hook 'nrepl-interaction-mode)
-(add-hook 'nrepl-interaction-mode-hook 'nrepl-turn-on-eldoc-mode)
-
-;; Ruby Modes
-(defun ruby-minor-modes ()
-  (progn
-    (rinari-minor-mode t)
-    (rainbow-delimiters-mode t)))
-
-(add-hook 'ruby-mode-hook 'ruby-minor-modes)
-
-;; Eshell Hooks
-(defun eshell-settings ()
-  (progn
-    (setq show-trailing-whitespace nil)))
-
-(add-hook 'eshell-mode-hook 'eshell-settings)
-
-;; Keybindings
-;; Paredit
-(require 'paredit)
-(define-key paredit-mode-map "\M-[" 'paredit-wrap-square)
-(define-key paredit-mode-map "\M-{" 'paredit-wrap-curly)
-
-;; EmacsClient should be quit with C-c C-c instead of C-x #
-(add-hook 'server-switch-hook
-          (lambda ()
-            (when (current-local-map)
-              (use-local-map (copy-keymap (current-local-map))))
-            (when server-buffer-clients
-              (local-set-key (kbd "C-c C-c") 'server-edit))))
-
-;; Evil mode needs undo tree to fully emulate undo-redo
-(add-hook 'evil-mode-hook
-          (lambda ()
-            (undo-tree-mode t)))
+(transient-mark-mode -1)                ;Don't hilight after marking. Mark twice to create an active (hilighted) region
 
 ;; Load mode-specific initialization files
 (require 'cl)
