@@ -115,7 +115,7 @@
 (require 'cl)
 
 (defun elisp-file? (filename)
-  (string-match-p "[a-zA-Z0-9\-]+.el" filename))
+  (string-match-p "^[a-zA-Z0-9\-]+.el$" filename))
 
 (setq init-dir "~/.emacs.d/initializers")
 
